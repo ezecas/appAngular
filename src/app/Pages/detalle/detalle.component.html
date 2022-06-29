@@ -1,0 +1,42 @@
+<div class="container">
+<div *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="card" *ngIf="!isLoading && !isError">
+  <mat-card class="example-card">
+    
+    <div>
+      <mat-card-header>
+        <mat-card-title>{{producto?.title}}</mat-card-title>
+      </mat-card-header>
+    </div>
+    
+    <div *ngIf="imagenes"> 
+      <img mat-card-image src={{imagenes[0]?.url}} alt={{producto?.title}}>
+    </div>
+
+    <mat-card-content>     
+      <div>
+        <span class="descripcionTitle">Descripción del Producto:</span>
+        <p class="descripcion">
+          {{descripcion}}
+        </p>
+      </div>
+      <div>
+        <p class="precio">
+          Precio: {{producto?.price | currency}}
+        </p>
+      </div>
+      <div>
+        <p class="cantidad">
+          Cantidad Disponible: {{producto?.available_quantity}} Unidades
+        </p>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" routerLink="/">Volver</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+</div>
+

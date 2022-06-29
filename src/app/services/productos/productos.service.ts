@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { lastValueFrom, Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
+import { Producto , ResponseProducto } from 'src/interfaces/Productos';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +15,23 @@ export class ProductosService {
   ) {}
 
   //funcion para leer productos
-  getAll(){
+  getAll():Observable<Producto[]>{
     //De esta manera obtenemos toda la estructura de los objetos que nos devuelve ML
     //return this.http.get("https://api.mercadolibre.com/sites/MLA/search?q=ipod");
 
     //De esta manera filtramos lo que nos devuelve solo en "results"
-    return this.http.get("https://api.mercadolibre.com/sites/MLA/search?q=ipod")
-      .pipe(map((value:any)=>value["results"])); //Importar map de rxjs/operators (ver rxjs.dev)
+    return this.http.get<ResponseProducto>("https://api.mercadolibre.com/sites/MLA/search?q=ipod")
+      .pipe(map((value:ResponseProducto)=>value.results)); //Importar map de rxjs/operators (ver rxjs.dev)
+  }
+
+  getById(id:string):Observable<Producto>{//:Promise<Producto>{
+    /* return lastValueFrom(this.http.get<Producto>(environment.apiEndpoint+"items/"+id)) */
+    //return lastValueFrom(this.http.get<Producto>("https://api.mercadolibre.com/items/id"))
+    return this.http.get<Producto>("https://api.mercadolibre.com/items/"+id);
+  }
+
+  getDescripcion(id:string){
+    return this.http.get<Producto>("https://api.mercadolibre.com/items/"+id+"/description");
   }
 
   //se pasa el body con los datos del elemento a crear

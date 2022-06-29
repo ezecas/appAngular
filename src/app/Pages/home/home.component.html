@@ -1,0 +1,43 @@
+<div>
+  <div *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="card" *ngIf="!isLoading && !isError">
+<mat-card>
+  <mat-card-header>           
+    <h2>Listado de Productos</h2>
+  </mat-card-header>
+  
+
+  <mat-card-content>
+
+<mat-grid-list cols="3" rowHeight="">
+    <mat-grid-tile *ngFor="let prod of productos">
+          
+          
+            <mat-card class="example-card">
+              <mat-card-header>               
+                <mat-card-title>{{prod.title | uppercase}}</mat-card-title>
+              </mat-card-header>
+
+              <div class="imgContainer">
+                <img mat-card-image src={{prod.thumbnail}} alt={{prod.title}}>
+              </div>
+              <mat-card-content>
+                <p class="cantidad">Cantidad Disponible: {{prod.available_quantity}} Unidades</p>
+                  
+                <p class="precio">Precio: {{prod.price | currency}}</p>
+                
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button color="primary" routerLink="producto/{{prod.id}}">Detalle</button>
+                
+              </mat-card-actions>       
+          </mat-card>
+          
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card-content>
+</mat-card>
+  </div>
+</div>

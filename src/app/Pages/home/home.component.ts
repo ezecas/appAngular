@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductosService } from '../services/productos/productos.service';
+import { ProductosService } from '../../services/productos/productos.service';
+import { Producto } from 'src/interfaces/Productos';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,9 @@ import { ProductosService } from '../services/productos/productos.service';
 })
 export class HomeComponent implements OnInit {
 
-  productos:any = [];
+  productos:Producto[] = [];
+  isLoading:boolean = true
+  isError:boolean | string =false
   constructor(
     //Inyectamos el servicio
     private produtoService:ProductosService
@@ -18,15 +21,17 @@ export class HomeComponent implements OnInit {
       //data tiene los datos que nos devuelve la API de ML
       //subscribe recibe dos funciones, la primera es de succes y la segunda de error
       this.produtoService.getAll()
-        .subscribe(
-          (data:any)=>{
-            console.log(data);
+        .subscribe({
+          next:(data:Producto[])=>{
             //this.productos = data["results"]; se coloca asi si en el service no filtramos
             this.productos = data; //ahora data tiene solo los datos de results de la API de ML
-        /* Comento esto para que no aparezca deprecado el subscribe }, 
-          error=>{
+            this.isError=false
+            this.isLoading=false
+          },
+          error:error=>{
             console.log(error);
-        } */
+            this.isError=true
+          }
       });
   }
   

@@ -25,7 +25,7 @@ export class RegistroComponent implements OnInit {
   resetForm(){
     this.registroForm.reset();
   }
-  registrarse(){
+  onRegistro(){
     if (this.registroForm.valid) {
       console.log(this.registroForm.value);
       this.resetForm;

@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     
    }
 
-   login(){
+   onLogin(){
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
     } else {
@@ -34,3 +34,4 @@ export class LoginComponent implements OnInit {
   }
 
 }
+

@@ -1,0 +1,77 @@
+
+<mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <!--Email-->
+        <div>  
+            <div>
+                <mat-form-field>
+                    <input
+                        type="text"
+                        matInput
+                        placeholder="Email"
+                        formControlName="email"
+                        />
+                </mat-form-field>
+            </div>
+
+            <div *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.dirty">
+                <p 
+                    *ngIf="loginForm.get('email')?.hasError('required')"
+                    [ngClass]="{error:loginForm.get('email')?.hasError('required') && loginForm.get('email')?.dirty}">
+                    El Campo es obligatorio
+                </p>
+                <p 
+                    *ngIf="loginForm.get('email')?.hasError('email')"
+                    [ngClass]="{error:loginForm.get('email')?.hasError('email') && loginForm.get('email')?.dirty}">
+                    Ingrese un email valido
+                </p>
+            </div>
+        </div>
+          
+        <!--Password-->
+        <div>
+            <div>
+                <mat-form-field>
+                    <input
+                      type="password"
+                      matInput
+                      placeholder="Password"
+                      formControlName="password"
+                    />
+                  </mat-form-field>
+            </div>
+
+            <div>
+                <div *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.dirty">
+                    <p 
+                        *ngIf="loginForm.get('password')?.hasError('required')"
+                        [ngClass]="{error:loginForm.get('password')?.hasError('required') && loginForm.get('password')?.dirty}">
+                        El Campo es obligatorio
+                    </p>
+                    <p 
+                        *ngIf="loginForm.get('password')?.hasError('minlength')"
+                        [ngClass]="{error:loginForm.get('password')?.hasError('minlength') 
+                            && loginForm.get('password')?.dirty
+                            && loginForm.get('password')?.hasError('minlength')}">
+                        Debe escribir al menos 6 caracteres
+                    </p>
+                    <p 
+                        *ngIf="loginForm.get('password')?.hasError('maxlength')"
+                        [ngClass]="{error:loginForm.get('password')?.hasError('maxlength') 
+                            && loginForm.get('password')?.dirty}">
+                        Debe escribir como máximo 10 caracteres
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <button type="submit" mat-raised-button color="primary">Login</button>
+        <button mat-raised-button routerLink="/" color="primary">Volver</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+

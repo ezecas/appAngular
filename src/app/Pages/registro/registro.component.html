@@ -1,0 +1,146 @@
+
+<mat-card>
+    <mat-card-title>Registro</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="registroForm" (ngSubmit)="onRegistro()">
+        
+        <!--Nombre-->
+        <div>  
+            <div>
+                <mat-form-field>
+                    <input
+                        type="text"
+                        matInput
+                        placeholder="Nombre"
+                        formControlName="nombre"
+                        />
+                </mat-form-field>
+            </div>
+
+            <div *ngIf="registroForm.get('nombre')?.errors && registroForm.get('nombre')?.dirty">
+                <p 
+                    *ngIf="registroForm.get('nombre')?.hasError('required')"
+                    [ngClass]="{error:registroForm.get('nombre')?.hasError('required') && registroForm.get('nombre')?.dirty}">
+                    El Campo es obligatorio
+                </p>
+                <p 
+                    *ngIf="registroForm.get('nombre')?.hasError('minlength')"
+                    [ngClass]="{error:registroForm.get('nombre')?.hasError('minlength') && registroForm.get('nombre')?.dirty}">
+                    Debe escribir al menos 2 caracteres
+                </p>
+            </div>
+        
+        </div>
+          
+        <!--Apellido-->
+        <div>
+            <div>
+                <mat-form-field>
+                    <input
+                      type="text"
+                      matInput
+                      placeholder="Apellido"
+                      formControlName="apellido"
+                    />
+                  </mat-form-field>
+            </div>
+
+            <div *ngIf="registroForm.get('apellido')?.errors && registroForm.get('apellido')?.dirty">
+                <p 
+                    *ngIf="registroForm.get('apellido')?.hasError('required')"
+                    [ngClass]="{error:registroForm.get('apellido')?.hasError('required') && registroForm.get('apellido')?.dirty}">
+                    El Campo es obligatorio
+                </p>
+                <p 
+                    *ngIf="registroForm.get('apellido')?.hasError('minlength')"
+                    [ngClass]="{error:registroForm.get('apellido')?.hasError('minlength') && registroForm.get('apellido')?.dirty}">
+                    Debe escribir al menos 2 caracteres
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Telefono-->
+        <div>
+            <div>
+                <mat-form-field>
+                    <input
+                      type="text"
+                      matInput
+                      placeholder="Teléfono"
+                      formControlName="telefono"
+                    />
+                  </mat-form-field>
+            </div>
+        </div>
+
+        <!--Email-->
+        <div>  
+            <div>
+                <mat-form-field>
+                    <input
+                        type="text"
+                        matInput
+                        placeholder="Email"
+                        formControlName="email"
+                        />
+                </mat-form-field>
+            </div>
+
+            <div *ngIf="registroForm.get('email')?.errors && registroForm.get('email')?.dirty">
+                <p 
+                    *ngIf="registroForm.get('email')?.hasError('required')"
+                    [ngClass]="{error:registroForm.get('email')?.hasError('required') && registroForm.get('email')?.dirty}">
+                    El Campo es obligatorio
+                </p>
+                <p 
+                    *ngIf="registroForm.get('email')?.hasError('email')"
+                    [ngClass]="{error:registroForm.get('email')?.hasError('email') && registroForm.get('email')?.dirty}">
+                    Ingrese un email valido
+                </p>
+            </div>
+        </div>
+          
+        <!--Password-->
+        <div>
+            <div>
+                <mat-form-field>
+                    <input
+                      type="password"
+                      matInput
+                      placeholder="Password"
+                      formControlName="password"
+                    />
+                  </mat-form-field>
+            </div>
+
+            <div>
+                <div *ngIf="registroForm.get('password')?.errors && registroForm.get('password')?.dirty">
+                    <p 
+                        *ngIf="registroForm.get('password')?.hasError('required')"
+                        [ngClass]="{error:registroForm.get('password')?.hasError('required') && registroForm.get('password')?.dirty}">
+                        El Campo es obligatorio
+                    </p>
+                    <p 
+                        *ngIf="registroForm.get('password')?.hasError('minlength')"
+                        [ngClass]="{error:registroForm.get('password')?.hasError('minlength') 
+                            && registroForm.get('password')?.dirty
+                            && registroForm.get('password')?.hasError('minlength')}">
+                        Debe escribir al menos 6 caracteres
+                    </p>
+                    <p 
+                        *ngIf="registroForm.get('password')?.hasError('maxlength')"
+                        [ngClass]="{error:registroForm.get('password')?.hasError('maxlength') 
+                            && registroForm.get('password')?.dirty}">
+                        Debe escribir como máximo 10 caracteres
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <button type="submit" mat-raised-button color="primary">Registrarme</button>
+        <button mat-raised-button routerLink="/" color="primary">Volver</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
